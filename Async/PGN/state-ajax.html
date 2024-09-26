@@ -1,0 +1,68 @@
+<!--
+Daftar State XMLHttpRequest
+
+Value   State                Description
+0       UNSENT               Client telah dibuat, namun open() belum dipanggil.
+1       OPENED               Fungsi open() telah dipanggil.
+2       HEADERS_RECEIVED     Fungsi send() telah dipanggil, dan header serta status sudah tersedia.
+3       LOADING              Data sedang diunduh, responseText berisi sebagian data.
+4       DONE                 Operasi telah selesai dan data sepenuhnya diterima.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="response"></h1>
+    <script>
+        function displayResponse(json) {
+            const header = document.getElementById("response"); 
+            // .getElementById("response") : Mengambil elemen dengan id "response" dari DOM.
+            
+            header.textContent = json.response; 
+            // .textContent : Mengatur atau mengambil teks dari elemen yang bersangkutan.
+            // .response : Properti dari objek JSON yang berisi data yang akan ditampilkan.
+        }
+
+        const ajax = new XMLHttpRequest();
+        // XMLHttpRequest : Membuat objek AJAX untuk melakukan request ke server secara asinkron.
+
+        ajax.onreadystatechange = function () {
+            console.info(`Ready state change ${ajax.readyState}`);
+            // .onreadystatechange : Event handler yang dipanggil setiap kali ada perubahan status pada AJAX.
+            // .readyState : Properti yang menunjukkan status atau state dari permintaan (0 sampai 4).
+        };
+
+        ajax.open("GET", "object.json");
+        // .open() : Membuka koneksi ke server, dengan metode request "GET" dan URL "object.json".
+
+        ajax.addEventListener("load", function () {
+            // .addEventListener("load", ...) : Menambahkan event listener untuk event 'load' yang akan dieksekusi setelah request selesai.
+            
+            if (ajax.status === 200) {
+                // .status : Properti yang menunjukkan status HTTP dari respon (200 berarti "OK").
+                const json = JSON.parse(ajax.responseText);
+                // .responseText : Properti yang menyimpan data respon dari server dalam bentuk teks (string).
+                // JSON.parse() : Mengubah string JSON menjadi objek JavaScript.
+
+                displayResponse(json);
+            }
+            else {
+                displayResponse({
+                    response: `Terjadi kesalahan dengan status ${ajax.status}`
+                });
+            }
+        });
+        ajax.send();
+        // .send() : Mengirim request ke server.
+    </script>
+</body>
+
+</html>
