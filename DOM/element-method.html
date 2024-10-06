@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Method</title>
+</head>
+
+<body>
+    <div class="content" id="content">
+        <h1 id="title">Belajar Javascript DOM</h1>
+        <p id="description">Selamat belajar javascript DOM</p>
+    </div>
+
+    <script>    
+        document.getElementById("title").remove();
+        const judul = document.createElement("h1");
+        judul.textContent = "Selamat Datang";
+        content.appendChild(judul); 
+    </script>
+</body>
+
+</html>

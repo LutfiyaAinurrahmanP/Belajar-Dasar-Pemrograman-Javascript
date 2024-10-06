@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Module Loading</title>
+</head>
+<body>
+    <input type="text" name="" id="name">
+    <input type="button" value="Say" id="sayButton">
+    <script type="module">
+        // Dinamic module digunakan untuk memberikan hak akses
+        // agar ketika source kode belum dipakai, source kode tidak
+        // akan dipanggil dan di download terlebih dahulu agar hemat 
+        // waktu dan kinerja web lebih cepat karena file yang belum/tidak dipakai
+        // tidak akan didownload/digunakan sebelum dipanggil
+        document.getElementById("sayButton").onclick = function(){
+            const name = document.getElementById("name").value;
+            console.info(name);
+
+            import("../Export/alert.mjs").then(function (module){
+                module.alertHello(name);
+            });
+        }
+    </script>
+</body>
+</html>

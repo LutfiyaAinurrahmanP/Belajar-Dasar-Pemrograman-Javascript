@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="https://www.programmerzamannow.com/img/pzn.png" alt="PZN img" id="logo">
+    <img src="" alt="" id="att-logo">
+    <img src="" alt="" id="att-logo2">
+    <script>
+        const logo = document.getElementById("logo");
+        const src = logo.getAttributeNode("src");
+
+        console.info(src.name);
+        console.info(src.value); 
+
+        // Menambahkan atribut pada object
+        const tambah = document.getElementById("att-logo");
+        const temp = document.createAttribute("src");
+        temp.value = "https://www.programmerzamannow.com/img/pzn.png";
+        tambah.setAttributeNode(temp);
+
+        //cara kedua
+        const tambah2 = document.getElementById("att-logo2");
+        tambah2.setAttribute("src", "https://www.programmerzamannow.com/img/pzn.png");
+    </script>
+</body>
+
+</html>
