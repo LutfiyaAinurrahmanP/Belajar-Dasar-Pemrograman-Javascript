@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td>Nama : </td>
+                <td id="nama"></td>
+            </tr>
+            <tr>
+                <td>Nim : </td>
+                <td id="nim"></td>
+            </tr>
+            <tr>
+                <td>Prodi : </td>
+                <td id="prodi"></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        function displayMahasiswa(json) {
+            const nama = document.getElementById("nama");
+            const nim = document.getElementById("nim");
+            const prodi = document.getElementById("prodi");
+            nama.textContent = json.nama;
+            nim.textContent = json.nim;
+            prodi.textContent = json.prodi;
+        }
+
+        function getProduct() {
+            return promise = new Promise(function (resolve, reject) {
+                const ajax = new XMLHttpRequest();
+                ajax.open("GET", "mahasiswaa.json");
+                ajax.onload = function () {
+                    if (ajax.status === 200) {
+                        //const json = JSON.parse(ajax.responseText);
+                        //displayMahasiswa(json);
+                        resolve(ajax.responseText);
+                    }
+                    else {
+                        //displayMahasiswa({
+                        //response: `Terjadi kesalahan dengan status ${ajax.status}`
+                        //})
+                        reject(`Terjadi kesalahan dengan status ${ajax.status}`);
+                    }
+                };
+                ajax.send();
+            });
+        }
+
+        getProduct()
+            .then(function (json) {
+                return JSON.parse(json);
+            })
+            .then(function (json) {
+                displayMahasiswa(json);
+            })
+            .catch(function (error) {
+                const nama = document.getElementById("nama").textContent = error;
+                const nim = document.getElementById("nim").textContent = error;
+                const prodi = document.getElementById("prodi").textContent = error;
+            })
+
+    </script>
+</body>
+
+</html>
